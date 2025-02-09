@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distress</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='distress.css') }}
+    ">
+</head>
+<body>
+    <div class="container">
+        <h2>YOU HAVE SUCCESSFULLY REGISTERED</h2>
+        <button class="distress-btn" onclick="sendDistressSignal()">DISTRESS CALL</button>
+    </div>
+
+    <script>
+        function sendDistressSignal() {
+            fetch('/sentdistress', { method: 'GET' })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='registration.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>REGISTRATION</h2>
+        <form id="registrationForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" required>
+
+            <label for="gender">Gender:</label>
+            <input type="text" id="gender" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" required>
+
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" required>
+
+            <label for="guardian">Guardian No:</label>
+            <input type="text" id="guardian" required>
+
+            <label for="phone">Phone No:</label>
+            <input type="text" id="phone" required>
+
+            <button type="submit">Create</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let userData = {
+                name: document.getElementById('name').value,
+                age: document.getElementById('age').value,
+                gender: document.getElementById('gender').value,
+                email: document.getElementById('email').value,
+                latitude: document.getElementById('latitude').value,
+                longitude: document.getElementById('longitude').value,
+                guardian: document.getElementById('guardian').value,
+                phone: document.getElementById('phone').value
+            };
+
+            fetch('/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+                window.location.href = "{{ url_for('distress') }}";
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
+
