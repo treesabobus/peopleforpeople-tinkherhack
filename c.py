@@ -73,4 +73,4 @@ def distress_signal():
     return jsonify({"message": "Distress signal sent!"}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)
